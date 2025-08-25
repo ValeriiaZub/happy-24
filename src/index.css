@@ -1,0 +1,240 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 20 14% 4%;
+    --foreground: 20 14% 98%;
+
+    --card: 20 14% 4%;
+    --card-foreground: 20 14% 98%;
+
+    --popover: 20 14% 4%;
+    --popover-foreground: 20 14% 98%;
+
+    --primary: 340 82% 52%;
+    --primary-foreground: 355 25% 95%;
+
+    --secondary: 20 5% 64%;
+    --secondary-foreground: 20 14% 98%;
+
+    --muted: 20 5% 64%;
+    --muted-foreground: 20 5% 64%;
+
+    --accent: 14 100% 57%;
+    --accent-foreground: 20 14% 4%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 20 5% 64%;
+    --input: 20 5% 64%;
+    --ring: 340 82% 52%;
+
+    --radius: 0.75rem;
+
+    /* Romantic Design System */
+    --rose-gold: 14 100% 57%;
+    --rose-gold-light: 14 85% 70%;
+    --rose-gold-dark: 14 90% 40%;
+    
+    --romantic-pink: 340 82% 52%;
+    --romantic-pink-light: 340 82% 65%;
+    --romantic-pink-dark: 340 82% 35%;
+    
+    --warm-cream: 28 44% 94%;
+    --deep-charcoal: 20 14% 4%;
+    --soft-gray: 20 5% 64%;
+    
+    /* Gradients */
+    --gradient-romantic: linear-gradient(135deg, hsl(var(--romantic-pink)), hsl(var(--rose-gold)));
+    --gradient-sunset: linear-gradient(135deg, hsl(var(--rose-gold-light)), hsl(var(--romantic-pink-light)));
+    --gradient-elegant: linear-gradient(180deg, hsl(var(--deep-charcoal)), hsl(20 14% 8%));
+    
+    /* Shadows */
+    --shadow-romantic: 0 10px 40px -10px hsl(var(--romantic-pink) / 0.4);
+    --shadow-golden: 0 20px 60px -15px hsl(var(--rose-gold) / 0.3);
+    --shadow-elegant: 0 25px 50px -12px hsl(20 14% 4% / 0.8);
+    
+    /* Music-themed colors */
+    --music-note: 45 100% 51%;
+    --rhythm-blue: 220 100% 50%;
+    
+    /* Animations */
+    --transition-romantic: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-gentle: all 0.4s ease-out;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 20 14% 4%;
+    --foreground: 20 14% 98%;
+
+    --card: 20 14% 4%;
+    --card-foreground: 20 14% 98%;
+
+    --popover: 20 14% 4%;
+    --popover-foreground: 20 14% 98%;
+
+    --primary: 340 82% 52%;
+    --primary-foreground: 355 25% 95%;
+
+    --secondary: 20 5% 64%;
+    --secondary-foreground: 20 14% 98%;
+
+    --muted: 20 5% 64%;
+    --muted-foreground: 20 5% 64%;
+
+    --accent: 14 100% 57%;
+    --accent-foreground: 20 14% 4%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 20 5% 64%;
+    --input: 20 5% 64%;
+    --ring: 340 82% 52%;
+    
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', 'Georgia', serif;
+  }
+}
+
+@layer components {
+  /* Music Animation */
+  .music-note {
+    @apply text-[hsl(var(--music-note))];
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .music-note:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+  
+  .music-note:nth-child(3) {
+    animation-delay: 1s;
+  }
+  
+  /* Romantic Animations */
+  .heart-beat {
+    animation: heartbeat 2s ease-in-out infinite;
+  }
+  
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  
+  .romantic-glow {
+    box-shadow: var(--shadow-romantic);
+  }
+  
+  .golden-glow {
+    box-shadow: var(--shadow-golden);
+  }
+  
+  /* Text Animations */
+  .typewriter {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
+  }
+}
+
+@layer utilities {
+  /* Custom Keyframes */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-10px) rotate(5deg); }
+    66% { transform: translateY(-5px) rotate(-3deg); }
+  }
+  
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes typing {
+    0% { width: 0; }
+    100% { width: 100%; }
+  }
+  
+  @keyframes blink-caret {
+    0%, 50% { border-color: transparent; }
+    51%, 100% { border-color: hsl(var(--romantic-pink)); }
+  }
+  
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  
+  /* Gradient Text */
+  .gradient-text {
+    background: var(--gradient-romantic);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Romantic Button */
+  .btn-romantic {
+    background: var(--gradient-romantic);
+    box-shadow: var(--shadow-romantic);
+    transition: var(--transition-romantic);
+  }
+  
+  .btn-romantic:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-golden);
+  }
+}
