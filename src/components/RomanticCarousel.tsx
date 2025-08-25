@@ -22,6 +22,7 @@ import photo13 from "./photos/13.png";
 import photo14 from "./photos/14.png";
 import photo15 from "./photos/15.png";
 import photo16 from "./photos/16.png";
+import musicFile from "./music/music.m4a";
 
 const photos = [
     photo1, photo2, photo3, photo4, photo5,
@@ -64,26 +65,69 @@ const RomanticCarousel = () => {
     const [shuffledPhotos, setShuffledPhotos] = useState<string[]>([]);
     const [isPlaying, setIsPlaying] = useState(false);
     const [revealedSegments, setRevealedSegments] = useState<number>(0);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
 
     // Shuffle photos on component mount
     useEffect(() => {
         setShuffledPhotos(shuffleArray(photos));
     }, []);
 
-    // Auto-play functionality
+        // Auto-play functionality
+        useEffect(() => {
+            if (isPlaying && shuffledPhotos.length > 0) {
+                const interval = setInterval(() => {
+                    setCurrentIndex((prev) => {
+                        const next = (prev + 1) % shuffledPhotos.length;
+                        // Reveal more message segments as we progress
+                        setRevealedSegments(Math.min(messageSegments.length, Math.floor((next + 1) * messageSegments.length / shuffledPhotos.length)));
+                        return next;
+                    });
+                }, 3000);
+                return () => clearInterval(interval);
+            }
+        }, [isPlaying, shuffledPhotos.length]);
+    
+        // Handle play/pause for both slideshow and music
+        const togglePlayPause = () => {
+            const newIsPlaying = !isPlaying;
+            setIsPlaying(newIsPlaying);
+    
+            if (audioRef.current) {
+                if (newIsPlaying) {
+                    audioRef.current.play().catch(error => {
+                        console.log("Audio play failed:", error);
+                    });
+                } else {
+                    audioRef.current.pause();
+                }
+            }
+        };
+
+    // Initialize audio and handle play/pause
     useEffect(() => {
-        if (isPlaying && shuffledPhotos.length > 0) {
-            const interval = setInterval(() => {
-                setCurrentIndex((prev) => {
-                    const next = (prev + 1) % shuffledPhotos.length;
-                    // Reveal more message segments as we progress
-                    setRevealedSegments(Math.min(messageSegments.length, Math.floor((next + 1) * messageSegments.length / shuffledPhotos.length)));
-                    return next;
-                });
-            }, 3000);
-            return () => clearInterval(interval);
-        }
-    }, [isPlaying, shuffledPhotos.length]);
+        // Create audio element
+        const audio = new Audio(musicFile);
+        audioRef.current = audio;
+
+        // Play audio when component mounts
+        const playAudio = async () => {
+            try {
+                await audio.play();
+                setIsPlaying(true);
+            } catch (error) {
+                console.log("Audio play failed:", error);
+            }
+        };
+
+        playAudio();
+
+        // Cleanup function
+        return () => {
+            audio.pause();
+            audioRef.current = null;
+        };
+    }, []);
+
 
     const goToNext = () => {
         const next = (currentIndex + 1) % shuffledPhotos.length;
@@ -126,7 +170,7 @@ const RomanticCarousel = () => {
                 </div>
                 <Button
                     variant="music"
-                    onClick={() => setIsPlaying(!isPlaying)}
+                    onClick={togglePlayPause}
                     className="gap-2"
                 >
                     {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
