@@ -7,32 +7,32 @@ import { cn } from "@/lib/utils";
 
 // Import all the romantic images
 import photo1 from "./photos/1.jpeg";
-import photo2 from "./photos/2.jpeg";
+// import photo2 from "./photos/2.jpeg";
 import photo3 from "./photos/3.jpeg";
 import photo4 from "./photos/4.jpeg";
 import photo5 from "./photos/5.jpeg";
 import photo6 from "./photos/6.jpeg";
-import photo7 from "./photos/7.jpeg";
-import photo8 from "./photos/8.jpeg";
-import photo9 from "./photos/9.jpeg";
+// import photo7 from "./photos/7.jpeg";
+// import photo8 from "./photos/8.jpeg";
+// import photo9 from "./photos/9.jpeg";
 import photo10 from "./photos/10.jpeg";
 import photo11 from "./photos/11.jpeg";
 import photo12 from "./photos/12.png";
 import photo13 from "./photos/13.png";
-import photo14 from "./photos/14.png";
+// import photo14 from "./photos/14.png";
 import photo15 from "./photos/15.png";
-import photo16 from "./photos/16.png";
+// import photo16 from "./photos/16.png";
 import musicFile from "./music/music.m4a";
 
 const photos = [
-    photo1, photo2, photo3, photo4, photo5,
-    photo6, photo7, photo8, photo9, photo10,
+    photo1, photo3, photo4, photo5,
+    photo6, photo10,
     photo11
     , photo12
     , photo13
-    , photo14
+    // , photo14
     , photo15
-    , photo16
+    // , photo16
 ];
 
 // Romantic message broken into parts for progressive reveal
